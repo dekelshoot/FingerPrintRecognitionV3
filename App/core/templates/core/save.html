@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FingerPrintRecognition</title>
+    <style>
+        /* Styles CSS */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            background-color: #f5f5f5;
+            padding: 10px;
+            text-align: center;
+            align-items: center;
+        }
+
+        #slogan {
+            font-size: 20px;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        #upload-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        #upload-form label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        #upload-form input[type="file"] {
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+        }
+
+        #upload-form button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border-radius:15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        #upload-button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border-radius:20%;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 24px;
+            color: #4caf50;
+        }
+
+        .image-container {
+            align-items: center;
+            justify-content: space-around;
+            background-color: rgb(237, 234, 231);
+            padding: 20px;
+            border: 2px dashed green;
+            width: 20%;
+        }
+
+        .image-container img {
+            width: 50%;
+            min-height: 70%;
+            max-height: 250px;
+            border-radius:5%;
+            object-fit: cover;
+        }
+
+            .change-image-button {
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: none;
+            color: green;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            .import-image{
+            padding: 5px;
+            border: 1px solid green;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+            .import-image:hover{
+            background-color: green;
+            color: white;
+            transition: all 0.1s linear;
+        }
+
+        .recognition-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            background-color: green;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+
+        .recognition-button i {
+            margin-right: 10px;
+        }
+
+        .recognition-button:hover {
+            background-color: darkgreen;
+        }
+
+        .recognition-button:active {
+            background-color: green;
+        }
+
+        footer {
+            position: fixed;
+            background-color: #333333;
+            color: #fff;
+            padding: 1%;
+            text-align: center;
+            font-size: 14px;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 5%;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .blink-text {
+            animation: blink 1s linear infinite;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <p>FingerPrintRecognition</p>
+    </header>
+    <br>
+    
+    <main>
+        <p>Application de reconnaissance d'empreintes digitales</p>
+
+        <form id="upload-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% if form.image.errors %}
+                <label for="image-upload" class="blink-text">Sélectionner une image :</label>
+                <script>
+                    setTimeout(function() {
+                        var blinkText = document.querySelector('.blink-text');
+                        blinkText.classList.remove('blink-text');
+                    }, 5000);
+                </script>
+            {% else %}
+                <label for="image-upload">Sélectionner une image :</label>
+            {% endif %}
+
+            <div class="image-container">
+                <img id="image-preview" src="static/core/img/download.jpeg" alt="profile picture">
+                <br>
+                <input class="change-image-button" type="file" id="image-input" name= "image" value = "{{form.image.value | default_if_none:''}}" style="display: none;">
+                <div class="import-image" onclick="import_image()">Importer l'image</div>
+            </div>
+
+            <script type="text/javascript">
+                function import_image(){
+                    const imageInput = document.getElementById('image-input');
+                    imageInput.click()
+                    
+                }
+                const imagePreview = document.getElementById('image-preview');
+                const imageInput = document.getElementById('image-input');
+
+                imageInput.addEventListener('change', (event) => {
+                  const file = event.target.files[0];
+                  const reader = new FileReader();
+
+                  reader.addEventListener('load', () => {
+                    imagePreview.src = reader.result;
+                  });
+
+                  reader.readAsDataURL(file);
+                });
+            </script>
+            <br>
+            <button class="recognition-button" type="submit">
+                <i class="fas fa-play"></i>
+                <span>Lancer la reconnaissance</span>
+            </button>
+        </form>
+        
+        {% if classe %}    
+            <div id="result" class="blink-text"> {{classe}} </div> 
+            <script>
+                setTimeout(function() {
+                    var blinkText = document.querySelector('.blink-text');
+                    blinkText.classList.remove('blink-text');
+                }, 10000);
+            </script>
+        {% endif %}
+
+    </main>
+    <br><br><br>
+    <footer>
+        <p>© 2023 FingerPrintRecognition. Tous droits reservés.</p>
+    </footer>
+
