@@ -14,5 +14,6 @@ image_gris.save('../1_2.jpg')
 
 from Image import MonImage
 
-i = MonImage("../1.jpg")
+i = MonImage("./labelises/D/1.jpg")
 print(len(i.extraire_caracteristique()))
+print(i.extraire_caracteristique())
