@@ -30,7 +30,7 @@ Ce projet a pour objectif de démontrer comment les empreintes digitales peuvent
 - **tensorflow** et **keras** : Pour la création et l'entraînement du réseau de neurones.
 
 
-## Explication des fichiers et dosiiers
+## Explication des fichiers et dosisiers
 
 1.  **/code**
 
