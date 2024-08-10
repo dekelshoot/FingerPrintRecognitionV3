@@ -30,6 +30,20 @@ Ce projet a pour objectif de démontrer comment les empreintes digitales peuvent
 - **tensorflow** et **keras** : Pour la création et l'entraînement du réseau de neurones.
 
 
+## Explication des fichiers et dosiiers
+
+1.  **/code**
+
+- **convert_imgs.py** : Ce fichier contient un script pour convertir des images PNG en images PGM. Il utilise la bibliothèque PIL pour ouvrir l'image, la convertir en niveaux de gris, puis l'enregistre au format PGM avec un en-tête et les valeurs de luminosité des pixels.
+
+- **extract_features.py** : Ce fichier extrait les caractéristiques des images dans des dossiers spécifiés, puis enregistre ces caractéristiques et leurs étiquettes associées dans un fichier CSV. Il utilise la classe MonImage pour obtenir les vecteurs de caractéristiques des images, les sérialise et les enregistre sous forme de fichiers .pkl pour l'entraînement et le test.
+
+- **get_vecteurs_caracteristiques.py** : Ce fichier charge les données sérialisées des vecteurs de caractéristiques et des labels d'entraînement et de test à partir de fichiers .pkl, puis les désérialise. Il affiche ensuite les tailles de ces vecteurs et imprime les étiquettes.
+
+- **Image.py** : Ce fichier définit la classe MonImage, qui fournit diverses méthodes pour manipuler les images, telles que la conversion en PGM, l'obtention d'une matrice de l'image, le calcul de la matrice LBP (Local Binary Pattern), et l'extraction de caractéristiques à partir de cette matrice. La classe permet aussi de segmenter l'image en blocs et de calculer des histogrammes pour chacun de ces blocs.
+
+- **training.py**: Ce fichier charge des vecteurs de caractéristiques d'entraînement et de test, pour entraîner un modèle de machine learning (réseau de neurones) avec TensorFlow/Keras, en se basant sur ces caractéristiques.
+
 ## Installation
 
 1. Clonez ce dépôt sur votre machine locale :
@@ -56,10 +70,11 @@ python manage.py runserver
 ```
 
 ## Utilisation
-Collecte des empreintes digitales : Suivez les instructions dans la vidéo pour capturer les empreintes digitales avec de l'encre et du papier.
-Soumission de l'image : Utilisez l'application web pour soumettre une image d'empreinte digitale.
-Prédiction : Le modèle prédit à qui appartient l'empreinte digitale en se basant sur les caractéristiques extraites.
-Contribution
+- Collecte des empreintes digitales : Suivez les instructions dans la vidéo pour capturer les empreintes digitales avec de l'encre et du papier.
+- Soumission de l'image : Utilisez l'application web pour soumettre une image d'empreinte digitale.
+- Prédiction : Le modèle prédit à qui appartient l'empreinte digitale en se basant sur les caractéristiques extraites.
+
+# Contribution
 Les contributions sont les bienvenues ! Veuillez soumettre une pull request ou ouvrir une issue pour discuter des modifications que vous souhaitez apporter.
 
 # License
