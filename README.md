@@ -34,6 +34,7 @@ Ce projet a pour objectif de démontrer comment les empreintes digitales peuvent
 
 1.  **/code**
 
+- **caracteristiques.cvs**: le dataset qui contient tous les vecteurs de caractéristiques
 - **convert_imgs.py** : Ce fichier contient un script pour convertir des images PNG en images PGM. Il utilise la bibliothèque PIL pour ouvrir l'image, la convertir en niveaux de gris, puis l'enregistre au format PGM avec un en-tête et les valeurs de luminosité des pixels.
 
 - **extract_features.py** : Ce fichier extrait les caractéristiques des images dans des dossiers spécifiés, puis enregistre ces caractéristiques et leurs étiquettes associées dans un fichier CSV. Il utilise la classe MonImage pour obtenir les vecteurs de caractéristiques des images, les sérialise et les enregistre sous forme de fichiers .pkl pour l'entraînement et le test.
@@ -43,6 +44,12 @@ Ce projet a pour objectif de démontrer comment les empreintes digitales peuvent
 - **Image.py** : Ce fichier définit la classe MonImage, qui fournit diverses méthodes pour manipuler les images, telles que la conversion en PGM, l'obtention d'une matrice de l'image, le calcul de la matrice LBP (Local Binary Pattern), et l'extraction de caractéristiques à partir de cette matrice. La classe permet aussi de segmenter l'image en blocs et de calculer des histogrammes pour chacun de ces blocs.
 
 - **training.py**: Ce fichier charge des vecteurs de caractéristiques d'entraînement et de test, pour entraîner un modèle de machine learning (réseau de neurones) avec TensorFlow/Keras, en se basant sur ces caractéristiques.
+
+
+2. **/App**:
+ le dossier de l'application django
+3. **/labelises:** le dataset
+4. **/tests:** les données de tests
 
 ## Installation
 
