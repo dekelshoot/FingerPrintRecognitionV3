@@ -7,27 +7,25 @@ from keras import backend as K
 NUM_CLASSES = 5
 
 
-from google.colab import drive
-drive.mount('/content/drive')
 
 
 # Charger le vecteur de car de test
-with open('/content/drive/MyDrive/x_test_data.pkl', 'rb') as fichier:
+with open('/x_test_data.pkl', 'rb') as fichier:
     x_test_data = fichier.read()
 
 
 # Charger le vecteur de car d'entrainement
-with open('/content/drive/MyDrive/x_train_data.pkl', 'rb') as fichier:
+with open('/x_train_data.pkl', 'rb') as fichier:
     x_train_data = fichier.read()
 
 
 # Charger le vecteur de label de test
-with open('/content/drive/MyDrive/y_test_data.pkl', 'rb') as fichier:
+with open('/y_test_data.pkl', 'rb') as fichier:
     y_test_data = fichier.read()
 
 
 # Charger le vecteur de label d'entrainement
-with open('/content/drive/MyDrive/y_train_data.pkl', 'rb') as fichier:
+with open('/y_train_data.pkl', 'rb') as fichier:
     y_train_data = fichier.read()
 
 
@@ -76,6 +74,6 @@ classes_predites = np.argmax(predictions, axis=1)
 # Affichage des classes prédites
 print("Classes prédites :", classes_predites)
 
-model.save('/content/drive/MyDrive/model.h5')
+model.save('/model.h5')
 
 
